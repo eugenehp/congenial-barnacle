@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
+import ffmpeg from 'fluent-ffmpeg';
 
 let menu;
 let template;
