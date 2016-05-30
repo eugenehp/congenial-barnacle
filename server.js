@@ -4,6 +4,7 @@ import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import ffmpeg from 'fluent-ffmpeg';
 
 import config from './webpack.config.development';
 
@@ -19,7 +20,6 @@ const wdm = webpackDevMiddleware(compiler, {
 });
 
 app.use(wdm);
-
 app.use(webpackHotMiddleware(compiler));
 
 const server = app.listen(PORT, 'localhost', err => {
@@ -37,4 +37,9 @@ process.on('SIGTERM', () => {
   server.close(() => {
     process.exit(0);
   });
+});
+
+app.get('/screenshot', (req,res) => {
+  console.log('ffmpeg',ffmpeg);
+  res.jsonp( {ffmpeg: 'call your ffmpeg command here'} );
 });
